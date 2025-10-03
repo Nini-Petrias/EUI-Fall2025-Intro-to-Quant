@@ -55,10 +55,10 @@ R script, R console, and the environment
 20+5
 ```
 
-
+<!-- commenting out shiny apps for now (after lab1)
 <iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
         width="100%" height="460" style="border:1px solid #ddd;"></iframe>
-        
+-->       
 
 #### create objects
 
@@ -84,9 +84,10 @@ twentyfive #check if it worked
 
 ```
 
+<!--
 <iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
         width="100%" height="460" style="border:1px solid #ddd;"></iframe>
-
+-->
 
 <details>
 
@@ -193,8 +194,10 @@ first_names <- c("nini", "elena", "jon")
 test_score <- c(80, 75, 99)
 ```
 
+<!--
 <iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
         width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->
 
 #### Binary vs. non-binary variables
 
@@ -221,8 +224,11 @@ distance <- c(1.452, 2.345, 0.298)
 dice_roll<- c(2,4,6)
 ```
 
+<!--
 <iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
         width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->
+
 
 #### R: In-Class Exercise
 
