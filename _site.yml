@@ -1,0 +1,35 @@
+name: "course-site"
+output_dir: "docs"
+
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+    self_contained: false
+    bootstrap_version: 3
+
+navbar:
+  title: "Lab"
+  left:
+    - text: "Week 1"
+      href: week01/index.html
+    - text: "Week 2"
+      href: week02/index.html
+    - text: "Week 3"
+      href: week03/index.html
+    - text: "Week 4"
+      href: week04/index.html
+    - text: "Week 5"
+      href: week05/index.html
+    - text: "Week 6"
+      href: week06/index.html
+    - text: "Week 7"
+      href: week07/index.html
+    - text: "Week 8"
+      href: week08/index.html
+    - text: "Week 9"
+      href: week09/index.html
+    - text: "Week 10"
+      href: week10/index.html
+

@@ -1,0 +1,282 @@
+---
+title: "Lab 1"
+author: "Nini Petriashvili"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    code_folding: show   # or hide
+    toc: true
+    toc_float: true
+    self_contained: false
+email: nini.petriashvili@eui.eu
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) # chunks show code unless you say otherwise
+
+p_needed <- c(# all packages you need to install here
+  "knitr",
+ # "ggplot2",
+ # "stargazer",
+ "bsplus",
+ "htmltools",
+  "haven", 
+   "MASS",
+  "dplyr" 
+  ) 
+
+# installs only the required packages 
+lapply(p_needed[!(p_needed %in% rownames(installed.packages()))], install.packages)
+lapply(p_needed, library, character.only = TRUE)
+
+if (!"summarytools" %in% rownames(installed.packages())){
+  remotes::install_github("dcomtois/summarytools", upgrade = "never", dependencies = TRUE)
+}
+
+set.seed(2025)
+```
+
+![Lab materials are based on Elena Llaudet’s book & instructions](images/Screenshot%202025-10-01%20at%2019.41.28.png)
+
+## Plan for today
+
+### Introduction to RStudio {.tabset}
+
+#### RStudio:
+
+R script, R console, and the environment
+
+#### R: do calculations
+
+```{r calculations}
+#1. R as a calculator: +, -, \*, /
+20+5
+```
+
+<!-- commenting out shiny apps for now (after lab1)
+<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
+        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->       
+
+#### create objects
+
+When creating objects consider:
+
+-   name [**cannot**]{.underline} begin with a **number** or contain **spaces** or special symbols like **\$ or %** that are reserved for other purposes
+
+-   name [**can**]{.underline} contain **\_ underscores**, which are good substitutes for spaces
+
+```{r objects}
+#2. Create objects \<-, "
+
+twentyfive <- 25 #this assigns number 25 to an object
+twentyfive #check if it worked
+```
+
+-   Objects [**can**]{.underline} contain **text** as well as **numbers**
+
+-   Now let's create an object named **class** and assign a value **sps2025** to it
+
+```{r objects2}
+#2. Create objects \<-, "
+
+```
+
+<!--
+<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
+        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->
+
+<details>
+
+<summary><strong>Q: Why did we use "" here but not above?</strong></summary>
+
+::: {markdown="1"}
+-   Names of objects, functions, arguments, and special values (`TRUE`, `FALSE`, `NA`, `NULL`) **should not** be in quotes.
+-   Other plain text should be in quotes.
+-   **Numbers** should never be in quotes unless you want R to treat them as text.
+:::
+
+</details>
+
+```{r Errors}
+#Errors are part of coding
+
+#see what would happen if you run instead:
+#class <- pols201
+```
+
+-   You can easily overwrite objects in R
+
+```{r overwriting}
+#this will overwrite class
+class <- "data analysis"
+```
+
+R is **case sensitive**:
+
+-   *class* is different than *Class*
+
+-   to avoid confusion, we use lower-case letters when naming objects
+
+#### use functions
+
+```{r c7, echo=FALSE}
+bs_carousel(id = "myCarousel7", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.05.04.png"), caption = "1") |>
+    bs_append(tags$img(src =  "images/Screenshot%202025-10-01%20at%2021.09.02.png"), caption = "2")
+```
+
+```{r functions1}
+#3. Use Functions: (), sqrt(), \#
+
+#sqrt() computes the square root of the argument
+sqrt (25)
+#or
+sqrt(twentyfive) #since we have already defined this object above
+```
+-   R will give you an error message if you run this line of code before creating the object twentyfive
+-   Code is sequential! One must run code in order
+-   Whenever returning to work on an R script, run all the code from the beginning
+
+
+### Observations and Variables {.tabset}
+
+#### Data/datasets/dataframes
+
+```{r c6, echo=FALSE}
+bs_carousel(id = "myCarousel6", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.24.35-01.png"), caption = "1") |>
+    bs_append(tags$img(src =  "images/Screenshot%202025-10-01%20at%2021.24.43.png"), caption = "2")
+```
+
+#### Observations and variables
+
+```{r c5, echo=FALSE}
+car2 <- bs_carousel(id = "myCarousel5", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.25.17.png"), caption = "1") |>
+    bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.25.45.png"), caption = "2") |>
+  bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.27.30.png"), caption = "3")
+
+# disable autoplay by adding data- attributes; also remove any ride attr
+car2$attribs[["data-interval"]] <- "false"
+car2$attribs[["data-ride"]] <- NULL
+
+car2
+```
+
+
+```{r vars}
+#defining a vector
+x <- c(10,5,8)
+```
+
+-   what is the name of the variable here?
+-   what are the observations in X?
+
+
+#### Character vs. numeric variables
+
+```{r c4, echo=FALSE}
+bs_carousel(id = "myCarousel4", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/Screenshot%202025-10-01%20at%2021.27.43.png"))
+```
+
+```{r ch}
+#Character variables
+first_names <- c("nini", "elena", "jon")
+```
+
+```{r Num}
+#Numeric variables
+test_score <- c(80, 75, 99)
+```
+
+<!--
+<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
+        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->
+
+#### Binary vs. non-binary variables
+
+Binary Variables:
+
+-   can take only **two values: 1s and 0s**
+
+-   represent the **presence/absence** of a trait:
+
+    -   Example: voted= {1, 0, 0, 1, 1, 1, 0}
+
+```{r binary}
+#Binary variables
+voted <- c(1, 0, 0, 1, 1, 1, 0)
+```
+
+Non-binary variables:
+
+-   can take **more** than two values
+
+```{r non-b}
+#Non-binary variables
+distance <- c(1.452, 2.345, 0.298)
+dice_roll<- c(2,4,6)
+```
+
+<!--
+<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
+        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
+-->
+
+
+#### R: In-Class Exercise
+
+Open Introduction.R from folder DSS
+
+R: setwd(), read.csv(), View(), head(), and dim()
+
+### Computing and Interpreting Means {.tabset}
+
+#### How to compute means
+
+```{r c1, echo=FALSE}
+bs_carousel(id = "myCarousel", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/mean.png"), caption = "1") |>
+  bs_append(tags$img(src = "images/mean2.png"), caption = "2")
+```
+
+#### How to interpret means
+
+```{r c2, echo=FALSE}
+bs_carousel(id = "myCarousel2", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/mean3.png"), caption = "3")
+```
+
+#### Unit of measurement
+
+```{r c3, echo=FALSE}
+car1 <- bs_carousel(id = "myCarousel3", use_indicators = TRUE, use_controls = TRUE) |>
+  bs_append(tags$img(src = "images/mean4.png"), caption = "4") |>
+  bs_append(tags$img(src = "images/mean5.png"), caption = "5") |>
+  bs_append(tags$img(src = "images/mean6.png"), caption = "6") |>
+  bs_append(tags$img(src = "images/mean7.png"), caption = "7") |>
+  bs_append(tags$img(src = "images/mean8.png"), caption = "8") |>
+  bs_append(tags$img(src = "images/mean9.png"), caption = "9") |>
+  bs_append(tags$img(src = "images/mean10.png"), caption = "10")
+
+# disable autoplay by adding data- attributes; also remove any ride attr
+car1$attribs[["data-interval"]] <- "false"
+car1$attribs[["data-ride"]] <- NULL
+
+car1
+```
+
+
+#### R: In-Class Exercise
+
+Open Introduction.R from folder DSS
+
+R: data\$variable and mean()
+
+#### 

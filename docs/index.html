@@ -9,19 +9,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Nini Petriashvili" />
 
-<meta name="date" content="2025-10-03" />
 
-<title>Lab 1</title>
+<title>index.knit</title>
 
-<script src="index_files/header-attrs-2.26/header-attrs.js"></script>
-<script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="index_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="index_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -31,13 +29,13 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="index_files/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="index_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="index_files/tocify-1.9.1/jquery.tocify.js"></script>
-<script src="index_files/navigation-1.1/tabsets.js"></script>
-<script src="index_files/navigation-1.1/codefolding.js"></script>
-<link href="index_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="index_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -97,6 +95,80 @@ pre code {
 </style>
 
 
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
 
 <!-- tabsets -->
 
@@ -238,6 +310,56 @@ div.tocify {
 
 
 
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Lab</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="week01/index.html">Week 1</a>
+</li>
+<li>
+  <a href="week02/index.html">Week 2</a>
+</li>
+<li>
+  <a href="week03/index.html">Week 3</a>
+</li>
+<li>
+  <a href="week04/index.html">Week 4</a>
+</li>
+<li>
+  <a href="week05/index.html">Week 5</a>
+</li>
+<li>
+  <a href="week06/index.html">Week 6</a>
+</li>
+<li>
+  <a href="week07/index.html">Week 7</a>
+</li>
+<li>
+  <a href="week08/index.html">Week 8</a>
+</li>
+<li>
+  <a href="week09/index.html">Week 9</a>
+</li>
+<li>
+  <a href="week10/index.html">Week 10</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 <div id="header">
 
 <div class="btn-group pull-right float-right">
@@ -250,378 +372,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab 1</h1>
-<h4 class="author">Nini Petriashvili</h4>
-<h4 class="date">October 03, 2025</h4>
 
 </div>
 
 
-<div class="float">
-<img src="images/Screenshot%202025-10-01%20at%2019.41.28.png"
-alt="Lab materials are based on Elena Llaudet’s book &amp; instructions" />
-<div class="figcaption">Lab materials are based on Elena Llaudet’s book
-&amp; instructions</div>
-</div>
-<div id="plan-for-today" class="section level2">
-<h2>Plan for today</h2>
-<div id="introduction-to-rstudio" class="section level3 tabset">
-<h3 class="tabset">Introduction to RStudio</h3>
-<div id="rstudio" class="section level4">
-<h4>RStudio:</h4>
-<p>R script, R console, and the environment</p>
-</div>
-<div id="r-do-calculations" class="section level4">
-<h4>R: do calculations</h4>
-<pre class="r"><code>#1. R as a calculator: +, -, \*, /
-20+5</code></pre>
-<pre><code>## [1] 25</code></pre>
-<!-- commenting out shiny apps for now (after lab1)
-<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
-        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
--->
-</div>
-<div id="create-objects" class="section level4">
-<h4>create objects</h4>
-<p>When creating objects consider:</p>
-<ul>
-<li><p>name <u><strong>cannot</strong></u> begin with a
-<strong>number</strong> or contain <strong>spaces</strong> or special
-symbols like <strong>$ or %</strong> that are reserved for other
-purposes</p></li>
-<li><p>name <u><strong>can</strong></u> contain <strong>_
-underscores</strong>, which are good substitutes for spaces</p></li>
-</ul>
-<pre class="r"><code>#2. Create objects \&lt;-, &quot;
-
-twentyfive &lt;- 25 #this assigns number 25 to an object
-twentyfive #check if it worked</code></pre>
-<pre><code>## [1] 25</code></pre>
-<ul>
-<li><p>Objects <u><strong>can</strong></u> contain <strong>text</strong>
-as well as <strong>numbers</strong></p></li>
-<li><p>Now let’s create an object named <strong>class</strong> and
-assign a value <strong>sps2025</strong> to it</p></li>
-</ul>
-<pre class="r"><code>#2. Create objects \&lt;-, &quot;</code></pre>
-<!--
-<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
-        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
--->
-<details>
-<summary>
-<strong>Q: Why did we use “” here but not above?</strong>
-</summary>
-<div markdown="1">
-<ul>
-<li>Names of objects, functions, arguments, and special values
-(<code>TRUE</code>, <code>FALSE</code>, <code>NA</code>,
-<code>NULL</code>) <strong>should not</strong> be in quotes.</li>
-<li>Other plain text should be in quotes.</li>
-<li><strong>Numbers</strong> should never be in quotes unless you want R
-to treat them as text.</li>
-</ul>
-</div>
-</details>
-<pre class="r"><code>#Errors are part of coding
-
-#see what would happen if you run instead:
-#class &lt;- pols201</code></pre>
-<ul>
-<li>You can easily overwrite objects in R</li>
-</ul>
-<pre class="r"><code>#this will overwrite class
-class &lt;- &quot;data analysis&quot;</code></pre>
-<p>R is <strong>case sensitive</strong>:</p>
-<ul>
-<li><p><em>class</em> is different than <em>Class</em></p></li>
-<li><p>to avoid confusion, we use lower-case letters when naming
-objects</p></li>
-</ul>
-</div>
-<div id="use-functions" class="section level4">
-<h4>use functions</h4>
-<div id="myCarousel7" class="carousel slide" data-ride="carousel">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel7" data-slide-to="0" class="active"></li>
-<li data-target="#myCarousel7" data-slide-to="1"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/Screenshot%202025-10-01%20at%2021.05.04.png"/>
-1
-</div>
-<div class="item">
-<img src="images/Screenshot%202025-10-01%20at%2021.09.02.png"/>
-2
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel7" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel7" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<pre class="r"><code>#3. Use Functions: (), sqrt(), \#
-
-#sqrt() computes the square root of the argument
-sqrt (25)</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>#or
-sqrt(twentyfive) #since we have already defined this object above</code></pre>
-<pre><code>## [1] 5</code></pre>
-<ul>
-<li>R will give you an error message if you run this line of code before
-creating the object twentyfive</li>
-<li>Code is sequential! One must run code in order</li>
-<li>Whenever returning to work on an R script, run all the code from the
-beginning</li>
-</ul>
-</div>
-</div>
-<div id="observations-and-variables" class="section level3 tabset">
-<h3 class="tabset">Observations and Variables</h3>
-<div id="datadatasetsdataframes" class="section level4">
-<h4>Data/datasets/dataframes</h4>
-<div id="myCarousel6" class="carousel slide" data-ride="carousel">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel6" data-slide-to="0" class="active"></li>
-<li data-target="#myCarousel6" data-slide-to="1"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/Screenshot%202025-10-01%20at%2021.24.35-01.png"/>
-1
-</div>
-<div class="item">
-<img src="images/Screenshot%202025-10-01%20at%2021.24.43.png"/>
-2
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel6" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel6" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-<div id="observations-and-variables-1" class="section level4">
-<h4>Observations and variables</h4>
-<div id="myCarousel5" class="carousel slide" data-interval="false">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel5" data-slide-to="0" class="active"></li>
-<li data-target="#myCarousel5" data-slide-to="1"></li>
-<li data-target="#myCarousel5" data-slide-to="2"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/Screenshot%202025-10-01%20at%2021.25.17.png"/>
-1
-</div>
-<div class="item">
-<img src="images/Screenshot%202025-10-01%20at%2021.25.45.png"/>
-2
-</div>
-<div class="item">
-<img src="images/Screenshot%202025-10-01%20at%2021.27.30.png"/>
-3
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel5" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel5" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<pre class="r"><code>#defining a vector
-x &lt;- c(10,5,8)</code></pre>
-<ul>
-<li>what is the name of the variable here?</li>
-<li>what are the observations in X?</li>
-</ul>
-</div>
-<div id="character-vs.-numeric-variables" class="section level4">
-<h4>Character vs. numeric variables</h4>
-<div id="myCarousel4" class="carousel slide" data-ride="carousel">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel4" data-slide-to="0" class="active"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/Screenshot%202025-10-01%20at%2021.27.43.png"/>
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel4" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel4" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-<pre class="r"><code>#Character variables
-first_names &lt;- c(&quot;nini&quot;, &quot;elena&quot;, &quot;jon&quot;)</code></pre>
-<pre class="r"><code>#Numeric variables
-test_score &lt;- c(80, 75, 99)</code></pre>
-<!--
-<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
-        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
--->
-</div>
-<div id="binary-vs.-non-binary-variables" class="section level4">
-<h4>Binary vs. non-binary variables</h4>
-<p>Binary Variables:</p>
-<ul>
-<li><p>can take only <strong>two values: 1s and 0s</strong></p></li>
-<li><p>represent the <strong>presence/absence</strong> of a trait:</p>
-<ul>
-<li>Example: voted= {1, 0, 0, 1, 1, 1, 0}</li>
-</ul></li>
-</ul>
-<pre class="r"><code>#Binary variables
-voted &lt;- c(1, 0, 0, 1, 1, 1, 0)</code></pre>
-<p>Non-binary variables:</p>
-<ul>
-<li>can take <strong>more</strong> than two values</li>
-</ul>
-<pre class="r"><code>#Non-binary variables
-distance &lt;- c(1.452, 2.345, 0.298)
-dice_roll&lt;- c(2,4,6)</code></pre>
-<!--
-<iframe src="https://nix955-nino-petriashvili.shinyapps.io/Lab1/"
-        width="100%" height="460" style="border:1px solid #ddd;"></iframe>
--->
-</div>
-<div id="r-in-class-exercise" class="section level4">
-<h4>R: In-Class Exercise</h4>
-<p>Open Introduction.R from folder DSS</p>
-<p>R: setwd(), read.csv(), View(), head(), and dim()</p>
-</div>
-</div>
-<div id="computing-and-interpreting-means"
-class="section level3 tabset">
-<h3 class="tabset">Computing and Interpreting Means</h3>
-<div id="how-to-compute-means" class="section level4">
-<h4>How to compute means</h4>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-<li data-target="#myCarousel" data-slide-to="1"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/mean.png"/>
-1
-</div>
-<div class="item">
-<img src="images/mean2.png"/>
-2
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-<div id="how-to-interpret-means" class="section level4">
-<h4>How to interpret means</h4>
-<div id="myCarousel2" class="carousel slide" data-ride="carousel">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/mean3.png"/>
-3
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-<div id="unit-of-measurement" class="section level4">
-<h4>Unit of measurement</h4>
-<div id="myCarousel3" class="carousel slide" data-interval="false">
-<ol class="carousel-indicators">
-<li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-<li data-target="#myCarousel3" data-slide-to="1"></li>
-<li data-target="#myCarousel3" data-slide-to="2"></li>
-<li data-target="#myCarousel3" data-slide-to="3"></li>
-<li data-target="#myCarousel3" data-slide-to="4"></li>
-<li data-target="#myCarousel3" data-slide-to="5"></li>
-<li data-target="#myCarousel3" data-slide-to="6"></li>
-</ol>
-<div class="carousel-inner" role="listbox">
-<div class="item active">
-<img src="images/mean4.png"/>
-4
-</div>
-<div class="item">
-<img src="images/mean5.png"/>
-5
-</div>
-<div class="item">
-<img src="images/mean6.png"/>
-6
-</div>
-<div class="item">
-<img src="images/mean7.png"/>
-7
-</div>
-<div class="item">
-<img src="images/mean8.png"/>
-8
-</div>
-<div class="item">
-<img src="images/mean9.png"/>
-9
-</div>
-<div class="item">
-<img src="images/mean10.png"/>
-10
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-<span class="sr-only">Previous</span>
-</a>
-<a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
-<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-<span class="sr-only">Next</span>
-</a>
-</div>
-</div>
-<div id="r-in-class-exercise-1" class="section level4">
-<h4>R: In-Class Exercise</h4>
-<p>Open Introduction.R from folder DSS</p>
-<p>R: data$variable and mean()</p>
-</div>
-<div id="section" class="section level4">
-<h4></h4>
-</div>
-</div>
-</div>
+<hr />
+<p>title: “Lab Homepage”</p>
+<p>Welcome. Pick a week from the navbar above.</p>
 
 
 

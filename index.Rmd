@@ -1,0 +1,4 @@
+---
+title: "Lab Homepage"
+
+Welcome. Pick a week from the navbar above.
