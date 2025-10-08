@@ -123,7 +123,7 @@ gert::git_config_set("user.email", "nipetriashvili7@gmail.com")
 gert::git_add(".")
 
 # Commit
-gert::git_commit("Update W1")
+gert::git_commit("lab2")
 
 
 
