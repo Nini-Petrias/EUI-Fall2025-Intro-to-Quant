@@ -8,6 +8,8 @@ output:
     toc: true
     toc_float: true
     self_contained: false
+bibliography: references.bib
+csl: apa.csl        
 email: nini.petriashvili@eui.eu
 editor_options: 
   chunk_output_type: inline
@@ -18,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE) # chunks show code unless you say otherwise
 
 p_needed <- c(# all packages you need to install here
   "knitr",
- # "ggplot2",
+  "ggplot2",
  # "stargazer",
  "bsplus",
  "htmltools",
@@ -38,12 +40,11 @@ if (!"summarytools" %in% rownames(installed.packages())){
 set.seed(2025)
 ```
 
-![Lab materials are based on Elena Llaudet’s book & instructions](images/cover.png)
+![Lab materials are partially based on Elena Llaudet’s book & instructions](images/cover.png)
 
 ## Plan for today
 
-
-### What is a percentage point? 
+### What is a percentage point?
 
 ![](images/percent.png)
 
@@ -51,19 +52,19 @@ set.seed(2025)
 
 ![](images/review.png)
 
-
 ![](images/estimator.png)
 
-![](images/estimator 2.png)
+![](images/estimator%202.png)
 
-### Does Social Pressure Affect Turnout?{.tabset}
+### Does Social Pressure Affect Turnout? {.tabset}
 
 ![](images/poster.png)
 
 ![](images/RQ.png)
 
 #### What do we need to calculate?
-![](images/What do..png)
+
+![](images/What%20do..png)
 
 #### difference-in-means
 
@@ -71,10 +72,65 @@ set.seed(2025)
 
 ![](images/formul2.png)
 
-
 ### Randomized experiments {.tabset}
 
-#### Why randomization works?
+#### Estimation
+
+Formally, we can write the outcome of each unit in either the treatment or control group using the following notation [@deaton2018understanding]:
+
+![](images/Deaton.png)
+
+![](images/where.png){width="614"}
+
+#### Average treatment effects (ATE)
+
+Researchers are typically interested in the average treatment effect (ATE), which is the **average causal effect** of a variable (e.g. a message to induce social pressure) **on an outcome** variable (e.g. voting) for the entire study population.
+
+In the classical experimental design the ATE can be estimated as the **difference in means** of the outcome **between the treatment and control groups**.
+
+Formally, we can take the **average of the treatment group** ($T=1$) and **the control group** ($T=0$) to estimate the **ATE**:
+
+![](images/ATE.png)
+
+$\hat{\beta}{1}$ is the **average treatment effect**; the subscript indicates that this estimate calculates the average of the treatment effects in the treatment group. The second term is the **“error term”** of the ATE estimate: **the average difference between treatment and control group that is unrelated to treatment** (from observable and unobservable differences).
+
+#### What does randomization do?
+![](images/ATE.png)
+
+Conceptually, randomization simply means that **every experimental unit has the same probability of being assigned** to a given group.
+
+Randomized assignment of treatment and control ensures that the $\hat{x}_{j}$ are **uncorrelated** with the **treatment assignment,** and so the ATE estimate is expected to be **unbiased**.
+
+If we were to repeat the experiment with many $N$-sized samples, the **average error term would be zero** and and the average of $\hat{\beta}{1}$ would be **equal to the ATE.**
+
+#### How it works?
+![](images/ATE.png)
+
+In any given sample, the error term will **likely not be zero** and $\hat{\beta}{1}$ will not be equal to the ATE. However, as the sample size $N$ grows, the variance of both around their true means decreases. As a result, **a larger sample size increases the statistical power** for tests about the ATE.
+
+In most settings, **the elements of the error term are not known** or completely observed which makes **randomization** **valuable** as it **ensures** that the **error term is zero** in expectation.
+
+**Balance** means that the distribution of those $\hat{x}_{ij}$ in the treatment group is similar to that in the control group.
+
+Randomization doesn’t guarantee perfect balance. It **guarantees no systematic bias**.
+
+#### Group Means in Voting.csv
+
+```{r load, echo=FALSE}
+voting <- read.csv("data/voting.csv")
+
+voting$pressure <- ifelse(voting$message == "yes", 1L, 0L)
+```
+
+```{r ggplot, echo=FALSE, fig.cap="Dataset: voting.csv"}
+ggplot(voting, aes(x = factor(pressure), y = birth)) +
+  geom_boxplot(fill = "grey80") +
+  labs(x = "Treatment group (0 = Control, 1 = Treated)",
+       y = "Year of birth",
+       title = "Comparison of Year of Birth (covariate) in Treatment \n and Control Groups")
+```
+
+#### Theoretical Example
 
 ```{r random plots, echo=FALSE, fig.width=12, fig.height=4, dev='png'}
 set.seed(123)
@@ -133,3 +189,4 @@ op <- par(mfrow = c(1, 3), mar = c(8, 4, 7, 1) + 0.2)
 for (sc in scenarios) simulate_and_plot(sc$N, sc$p, sc$R, sc$label)
 ```
 
+### References

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Nini Petriashvili" />
 
-<meta name="date" content="2025-10-08" />
+<meta name="date" content="2025-10-09" />
 
 <title>Lab 2</title>
 
@@ -63,6 +63,29 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -252,16 +275,16 @@ div.tocify {
 
 <h1 class="title toc-ignore">Lab 2</h1>
 <h4 class="author">Nini Petriashvili</h4>
-<h4 class="date">October 08, 2025</h4>
+<h4 class="date">October 09, 2025</h4>
 
 </div>
 
 
 <div class="float">
 <img src="images/cover.png"
-alt="Lab materials are based on Elena Llaudet’s book &amp; instructions" />
-<div class="figcaption">Lab materials are based on Elena Llaudet’s book
-&amp; instructions</div>
+alt="Lab materials are partially based on Elena Llaudet’s book &amp; instructions" />
+<div class="figcaption">Lab materials are partially based on Elena
+Llaudet’s book &amp; instructions</div>
 </div>
 <div id="plan-for-today" class="section level2">
 <h2>Plan for today</h2>
@@ -293,9 +316,98 @@ class="section level3 tabset">
 </div>
 <div id="randomized-experiments" class="section level3 tabset">
 <h3 class="tabset">Randomized experiments</h3>
-<div id="why-randomization-works" class="section level4">
-<h4>Why randomization works?</h4>
+<div id="estimation" class="section level4">
+<h4>Estimation</h4>
+<p>Formally, we can write the outcome of each unit in either the
+treatment or control group using the following notation <span
+class="citation">(Deaton &amp; Cartwright, 2018)</span>:</p>
+<p><img src="images/Deaton.png" /></p>
+<p><img src="images/where.png" width="614" /></p>
+</div>
+<div id="average-treatment-effects-ate" class="section level4">
+<h4>Average treatment effects (ATE)</h4>
+<p>Researchers are typically interested in the average treatment effect
+(ATE), which is the <strong>average causal effect</strong> of a variable
+(e.g. a message to induce social pressure) <strong>on an
+outcome</strong> variable (e.g. voting) for the entire study
+population.</p>
+<p>In the classical experimental design the ATE can be estimated as the
+<strong>difference in means</strong> of the outcome <strong>between the
+treatment and control groups</strong>.</p>
+<p>Formally, we can take the <strong>average of the treatment
+group</strong> (<span class="math inline">\(T=1\)</span>) and
+<strong>the control group</strong> (<span
+class="math inline">\(T=0\)</span>) to estimate the
+<strong>ATE</strong>:</p>
+<p><img src="images/ATE.png" /></p>
+<p><span class="math inline">\(\hat{\beta}{1}\)</span> is the
+<strong>average treatment effect</strong>; the subscript indicates that
+this estimate calculates the average of the treatment effects in the
+treatment group. The second term is the <strong>“error term”</strong> of
+the ATE estimate: <strong>the average difference between treatment and
+control group that is unrelated to treatment</strong> (from observable
+and unobservable differences).</p>
+</div>
+<div id="what-does-randomization-do" class="section level4">
+<h4>What does randomization do?</h4>
+<p><img src="images/ATE.png" /></p>
+<p>Conceptually, randomization simply means that <strong>every
+experimental unit has the same probability of being assigned</strong> to
+a given group.</p>
+<p>Randomized assignment of treatment and control ensures that the <span
+class="math inline">\(\hat{x}_{j}\)</span> are
+<strong>uncorrelated</strong> with the <strong>treatment
+assignment,</strong> and so the ATE estimate is expected to be
+<strong>unbiased</strong>.</p>
+<p>If we were to repeat the experiment with many <span
+class="math inline">\(N\)</span>-sized samples, the <strong>average
+error term would be zero</strong> and and the average of <span
+class="math inline">\(\hat{\beta}{1}\)</span> would be <strong>equal to
+the ATE.</strong></p>
+</div>
+<div id="how-it-works" class="section level4">
+<h4>How it works?</h4>
+<p><img src="images/ATE.png" /></p>
+<p>In any given sample, the error term will <strong>likely not be
+zero</strong> and <span class="math inline">\(\hat{\beta}{1}\)</span>
+will not be equal to the ATE. However, as the sample size <span
+class="math inline">\(N\)</span> grows, the variance of both around
+their true means decreases. As a result, <strong>a larger sample size
+increases the statistical power</strong> for tests about the ATE.</p>
+<p>In most settings, <strong>the elements of the error term are not
+known</strong> or completely observed which makes
+<strong>randomization</strong> <strong>valuable</strong> as it
+<strong>ensures</strong> that the <strong>error term is zero</strong> in
+expectation.</p>
+<p><strong>Balance</strong> means that the distribution of those <span
+class="math inline">\(\hat{x}_{ij}\)</span> in the treatment group is
+similar to that in the control group.</p>
+<p>Randomization doesn’t guarantee perfect balance. It
+<strong>guarantees no systematic bias</strong>.</p>
+</div>
+<div id="group-means-in-voting.csv" class="section level4">
+<h4>Group Means in Voting.csv</h4>
+<div class="figure">
+<img src="index_files/figure-html/ggplot-1.png" alt="Dataset: voting.csv" width="672" />
+<p class="caption">
+Dataset: voting.csv
+</p>
+</div>
+</div>
+<div id="theoretical-example" class="section level4">
+<h4>Theoretical Example</h4>
 <p><img src="index_files/figure-html/random%20plots-1.png" width="1152" /></p>
+</div>
+</div>
+<div id="references" class="section level3 unnumbered">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0" line-spacing="2">
+<div id="ref-deaton2018understanding" class="csl-entry">
+Deaton, A., &amp; Cartwright, N. (2018). Understanding and
+misunderstanding randomized controlled trials. <em>Social Science &amp;
+Medicine</em>, <em>210</em>, 2–21.
+</div>
 </div>
 </div>
 </div>
