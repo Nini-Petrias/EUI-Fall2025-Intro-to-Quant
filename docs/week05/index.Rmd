@@ -1,0 +1,23 @@
+---
+title: "Week 5"
+---
+
+```{r setup, include=FALSE}
+library(bsplus); library(htmltools); library(magrittr)
+bsplus::use_bs_carousel()
+
+Tabs {.tabset}
+Section A
+
+Content.
+
+Section B
+
+More content.
+
+Carousel
+bs_carousel(id = "car", use_indicators = TRUE, use_controls = TRUE) %>%
+  bs_append(tags$img(src = "images/img1.png"), caption = "One") %>%
+  bs_append(tags$img(src = "images/img2.png"), caption = "Two")
+  
+  

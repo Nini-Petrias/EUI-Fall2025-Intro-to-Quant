@@ -130,4 +130,5 @@ ggplot(voting, aes(x = factor(pressure), y = birth)) +
        title = "Comparison of Year of Birth (covariate) in Treatment \n and Control Groups")
 ```
 
+
 ### References
